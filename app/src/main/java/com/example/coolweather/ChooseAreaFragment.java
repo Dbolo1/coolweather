@@ -113,7 +113,7 @@ public class ChooseAreaFragment extends Fragment {
      provinceList = DataSupport.findAll(Province.class);
      if(provinceList.size()>0){
          dataList.clear();
-         for(Province province: provinceList){
+         for(Province province : provinceList){
           dataList.add(province.getProvinceName());
          }
          adapter.notifyDataSetChanged();
@@ -128,7 +128,7 @@ public class ChooseAreaFragment extends Fragment {
     /**
      * 查询选中省内所有的市，优先从数据库查询如果没有查询到再去服务器上查询
      */
-    private void queryCities() {
+    private void queryCities(){
         titleText.setText(selectedProvince.getProvinceName());
         backbutton.setVisibility(View.VISIBLE);
         cityList = DataSupport.where("provinceid = ?",String.valueOf(selectedProvince.getId())).find(City.class);
@@ -152,7 +152,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCounties() {
         titleText.setText(selectedCity.getCityName());
         backbutton.setVisibility(View.VISIBLE);
-        countyList = DataSupport.where("cityid=?",String.valueOf(selectedCity.getId())).find(County.class);
+        countyList = DataSupport.where("cityid = ?",String.valueOf(selectedCity.getId())).find(County.class);
         if(countyList.size()>0){
             dataList.clear();
             for(County county: countyList){
@@ -228,10 +228,13 @@ public class ChooseAreaFragment extends Fragment {
         }
         progressDialog.show();
     }
+
+    /**
+     * 关闭进度对话框
+     */
     private void closeProgressDialog() {
         if(progressDialog!=null){
             progressDialog.dismiss();
         }
-
     }
 }
